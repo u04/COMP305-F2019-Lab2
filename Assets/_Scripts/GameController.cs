@@ -58,6 +58,7 @@ public class GameController : MonoBehaviour
         set
         {
             _score = value;
+            scoreBoard.score = _score;
 
 
             if (scoreBoard.highScore < _score)
@@ -76,6 +77,7 @@ public class GameController : MonoBehaviour
         set
         {
             _lives = value;
+            scoreBoard.lives = _lives;
             if (_lives < 1)
             {
                 SceneManager.LoadScene("End");
@@ -113,7 +115,14 @@ public class GameController : MonoBehaviour
 
         activeSceneSettiings = query.ToList().First();
         {
-            activeSoundClip = activeSceneSettiings.activeSoundClip;
+
+
+            if (activeSceneSettiings.scene == Scene.MAIN)
+            {
+                Lives = 5;
+                Score = 0;
+            }
+             activeSoundClip = activeSceneSettiings.activeSoundClip;
             scoreLabel.enabled = activeSceneSettiings.scoreLabelEnabled;
             livesLabel.enabled = activeSceneSettiings.livesLabelEnabled;
             highScoreLabel.enabled = activeSceneSettiings.highScoreLabelEnabled;
@@ -121,6 +130,9 @@ public class GameController : MonoBehaviour
             endLabel.SetActive(activeSceneSettiings.endLabelActive);
             startButton.SetActive(activeSceneSettiings.startButtonActive);
             restartButton.SetActive(activeSceneSettiings.restartButtonActive);
+            // assigns text values to labels from the scoreboard Scriptable object
+            livesLabel.text = "Lives: " + scoreBoard.lives;
+            scoreLabel.text = "Score: " + scoreBoard.score;
             highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         }
 
@@ -152,8 +164,7 @@ public class GameController : MonoBehaviour
         //         highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         //         break;
         // }
-        Lives = 5;
-        Score = 0;
+
         if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
         {
             AudioSource activeAudioSource = audioSources[(int)activeSoundClip];
@@ -187,13 +198,6 @@ public class GameController : MonoBehaviour
 
         Instantiate(island);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Event Handlers
     public void OnStartButtonClick()
     {

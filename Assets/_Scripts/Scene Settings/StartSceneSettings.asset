@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86b2c64a71d4e49499c0c475b55531c8, type: 3}
   m_Name: StartSceneSettings
   m_EditorClassIdentifier: 
+  scene: 0
   activeSoundClip: -1
   scoreLabelEnabled: 0
   livesLabelEnabled: 0
