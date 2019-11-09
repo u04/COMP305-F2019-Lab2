@@ -6,6 +6,7 @@ using UnityEngine;
 public class SceneSettings : ScriptableObject
 {
     [Header("Scene Conf")]
+    public Scene scene;
     public SoundClip activeSoundClip;
     [Header("Scoreboard Labels")]
     public bool scoreLabelEnabled;

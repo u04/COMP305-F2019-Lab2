@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
+using System.Linq;
+using System;
 
 
 public class GameController : MonoBehaviour
@@ -29,7 +31,7 @@ public class GameController : MonoBehaviour
     public Text scoreLabel;
     public Text highScoreLabel;
 
-   
+
 
     //public HighScoreSO highScoreSO;
 
@@ -43,29 +45,9 @@ public class GameController : MonoBehaviour
     public ScoreBoard scoreBoard;
 
     // public properties
-    public int Lives
-    {
-        get
-        {
-            return _lives;
-        }
-
-        set
-        {
-            _lives = value;
-            if(_lives < 1)
-            {
-                
-                SceneManager.LoadScene("End");
-            }
-            else
-            {
-                livesLabel.text = "Lives: " + _lives;
-            }
-           
-        }
-    }
-
+    [Header("Scene Settings")]
+    public SceneSettings activeSceneSettiings;
+    public List<SceneSettings> SceneSettings;
     public int Score
     {
         get
@@ -83,6 +65,25 @@ public class GameController : MonoBehaviour
                 scoreBoard.highScore = _score;
             }
             scoreLabel.text = "Score: " + _score;
+        }
+    }
+    public int Lives
+    {
+        get
+        {
+            return _lives;
+        }
+        set
+        {
+            _lives = value;
+            if (_lives < 1)
+            {
+                SceneManager.LoadScene("End");
+            }
+            else
+            {
+                livesLabel.text = "Lives: " + _lives;
+            }
         }
     }
 
@@ -106,38 +107,53 @@ public class GameController : MonoBehaviour
 
     private void SceneConfiguration()
     {
-        switch (SceneManager.GetActiveScene().name)
+        var query = from settings in SceneSettings
+                    where settings.scene == (Scene)Enum.Parse(typeof(Scene), SceneManager.GetActiveScene().name.ToUpper())
+                    select settings;
+
+        activeSceneSettiings = query.ToList().First();
         {
-            case "Start":
-                scoreLabel.enabled = false;
-                livesLabel.enabled = false;
-                highScoreLabel.enabled = false;
-                endLabel.SetActive(false);
-                restartButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
-                break;
-            case "Main":
-                highScoreLabel.enabled = false;
-                startLabel.SetActive(false);
-                startButton.SetActive(false);
-                endLabel.SetActive(false);
-                restartButton.SetActive(false);
-                activeSoundClip = SoundClip.ENGINE;
-                break;
-            case "End":
-                scoreLabel.enabled = false;
-                livesLabel.enabled = false;
-                startLabel.SetActive(false);
-                startButton.SetActive(false);
-                activeSoundClip = SoundClip.NONE;
-                highScoreLabel.text = "High Score: " + scoreBoard.highScore;
-                break;
+            activeSoundClip = activeSceneSettiings.activeSoundClip;
+            scoreLabel.enabled = activeSceneSettiings.scoreLabelEnabled;
+            livesLabel.enabled = activeSceneSettiings.livesLabelEnabled;
+            highScoreLabel.enabled = activeSceneSettiings.highScoreLabelEnabled;
+            startLabel.SetActive(activeSceneSettiings.startLabelActive);
+            endLabel.SetActive(activeSceneSettiings.endLabelActive);
+            startButton.SetActive(activeSceneSettiings.startButtonActive);
+            restartButton.SetActive(activeSceneSettiings.restartButtonActive);
+            highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         }
 
+
+        // switch (SceneManager.GetActiveScene().name)
+        // {
+        //     case "Start":
+        //         scoreLabel.enabled = false;
+        //         livesLabel.enabled = false;
+        //         highScoreLabel.enabled = false;
+        //         endLabel.SetActive(false);
+        //         restartButton.SetActive(false);
+        //         activeSoundClip = SoundClip.NONE;
+        //         break;
+        //     case "Main":
+        //         highScoreLabel.enabled = false;
+        //         startLabel.SetActive(false);
+        //         startButton.SetActive(false);
+        //         endLabel.SetActive(false);
+        //         restartButton.SetActive(false);
+        //         activeSoundClip = SoundClip.ENGINE;
+        //         break;
+        //     case "End":
+        //         scoreLabel.enabled = false;
+        //         livesLabel.enabled = false;
+        //         startLabel.SetActive(false);
+        //         startButton.SetActive(false);
+        //         activeSoundClip = SoundClip.NONE;
+        //         highScoreLabel.text = "High Score: " + scoreBoard.highScore;
+        //         break;
+        // }
         Lives = 5;
         Score = 0;
-
-
         if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
         {
             AudioSource activeAudioSource = audioSources[(int)activeSoundClip];
@@ -149,13 +165,25 @@ public class GameController : MonoBehaviour
 
 
 
+
+
+
+
         // creates an empty container (list) of type GameObject
+
         clouds = new List<GameObject>();
 
+
+
         for (int cloudNum = 0; cloudNum < numberOfClouds; cloudNum++)
+
         {
+
             clouds.Add(Instantiate(cloud));
+
         }
+
+
 
         Instantiate(island);
     }
@@ -163,7 +191,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // Event Handlers
