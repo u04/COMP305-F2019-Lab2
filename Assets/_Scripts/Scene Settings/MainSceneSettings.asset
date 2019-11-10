@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86b2c64a71d4e49499c0c475b55531c8, type: 3}
+  m_Script: {fileID: 11500000, guid: c23725c221aa1da47af752693fbb8a73, type: 3}
   m_Name: MainSceneSettings
   m_EditorClassIdentifier: 
-  scene: 0
+  scene: 1
   activeSoundClip: 0
   scoreLabelEnabled: 1
   livesLabelEnabled: 1
   highScoreLabelEnabled: 0
-  startLabelActive: 1
+  startLabelActive: 0
   endLabelActive: 0
-  startButtonActive: 1
+  startButtonActive: 0
   restartButtonActive: 0

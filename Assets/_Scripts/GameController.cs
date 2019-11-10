@@ -1,12 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Linq;
-using System;
-
 
 public class GameController : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public class GameController : MonoBehaviour
     public Text scoreLabel;
     public Text highScoreLabel;
 
-
+   
 
     //public HighScoreSO highScoreSO;
 
@@ -44,10 +43,36 @@ public class GameController : MonoBehaviour
     [Header("Game Settings")]
     public ScoreBoard scoreBoard;
 
-    // public properties
     [Header("Scene Settings")]
-    public SceneSettings activeSceneSettiings;
-    public List<SceneSettings> SceneSettings;
+    public SceneSettings activeSceneSettings;
+    public List<SceneSettings> sceneSettings;
+
+    // public properties
+    public int Lives
+    {
+        get
+        {
+            return _lives;
+        }
+
+        set
+        {
+            _lives = value;
+            scoreBoard.lives = _lives;
+
+            if(_lives < 1)
+            {
+                
+                SceneManager.LoadScene("End");
+            }
+            else
+            {
+                livesLabel.text = "Lives: " + _lives;
+            }
+           
+        }
+    }
+
     public int Score
     {
         get
@@ -60,32 +85,11 @@ public class GameController : MonoBehaviour
             _score = value;
             scoreBoard.score = _score;
 
-
             if (scoreBoard.highScore < _score)
             {
                 scoreBoard.highScore = _score;
             }
             scoreLabel.text = "Score: " + _score;
-        }
-    }
-    public int Lives
-    {
-        get
-        {
-            return _lives;
-        }
-        set
-        {
-            _lives = value;
-            scoreBoard.lives = _lives;
-            if (_lives < 1)
-            {
-                SceneManager.LoadScene("End");
-            }
-            else
-            {
-                livesLabel.text = "Lives: " + _lives;
-            }
         }
     }
 
@@ -109,61 +113,42 @@ public class GameController : MonoBehaviour
 
     private void SceneConfiguration()
     {
-        var query = from settings in SceneSettings
-                    where settings.scene == (Scene)Enum.Parse(typeof(Scene), SceneManager.GetActiveScene().name.ToUpper())
+        // selects the current scene
+        Scene sceneToCompare = (Scene) Enum.Parse(typeof(Scene),
+            SceneManager.GetActiveScene().name.ToUpper());
+
+        // compares the settings list withe current scene
+        var query = from settings in sceneSettings
+                    where settings.scene == sceneToCompare
                     select settings;
 
-        activeSceneSettiings = query.ToList().First();
+        // sets the appropriate settings for the loaded scene
+        activeSceneSettings = query.ToList().First();
+
         {
-
-
-            if (activeSceneSettiings.scene == Scene.MAIN)
+            // checks if the Main scene is active and sets up initial lives and score
+            if (activeSceneSettings.scene == Scene.MAIN)
             {
                 Lives = 5;
                 Score = 0;
             }
-             activeSoundClip = activeSceneSettiings.activeSoundClip;
-            scoreLabel.enabled = activeSceneSettiings.scoreLabelEnabled;
-            livesLabel.enabled = activeSceneSettiings.livesLabelEnabled;
-            highScoreLabel.enabled = activeSceneSettiings.highScoreLabelEnabled;
-            startLabel.SetActive(activeSceneSettiings.startLabelActive);
-            endLabel.SetActive(activeSceneSettiings.endLabelActive);
-            startButton.SetActive(activeSceneSettiings.startButtonActive);
-            restartButton.SetActive(activeSceneSettiings.restartButtonActive);
+
+            // applies all scene settings from the scene settings Scriptable object
+            activeSoundClip = activeSceneSettings.activeSoundClip;
+            scoreLabel.enabled = activeSceneSettings.scoreLabelEnabled;
+            livesLabel.enabled = activeSceneSettings.livesLabelEnabled;
+            highScoreLabel.enabled = activeSceneSettings.highScoreLabelEnabled;
+            startLabel.SetActive(activeSceneSettings.startLabelActive);
+            endLabel.SetActive(activeSceneSettings.endLabelActive);
+            startButton.SetActive(activeSceneSettings.startButtonActive);
+            restartButton.SetActive(activeSceneSettings.restartButtonActive);
+
             // assigns text values to labels from the scoreboard Scriptable object
             livesLabel.text = "Lives: " + scoreBoard.lives;
             scoreLabel.text = "Score: " + scoreBoard.score;
             highScoreLabel.text = "High Score: " + scoreBoard.highScore;
         }
 
-
-        // switch (SceneManager.GetActiveScene().name)
-        // {
-        //     case "Start":
-        //         scoreLabel.enabled = false;
-        //         livesLabel.enabled = false;
-        //         highScoreLabel.enabled = false;
-        //         endLabel.SetActive(false);
-        //         restartButton.SetActive(false);
-        //         activeSoundClip = SoundClip.NONE;
-        //         break;
-        //     case "Main":
-        //         highScoreLabel.enabled = false;
-        //         startLabel.SetActive(false);
-        //         startButton.SetActive(false);
-        //         endLabel.SetActive(false);
-        //         restartButton.SetActive(false);
-        //         activeSoundClip = SoundClip.ENGINE;
-        //         break;
-        //     case "End":
-        //         scoreLabel.enabled = false;
-        //         livesLabel.enabled = false;
-        //         startLabel.SetActive(false);
-        //         startButton.SetActive(false);
-        //         activeSoundClip = SoundClip.NONE;
-        //         highScoreLabel.text = "High Score: " + scoreBoard.highScore;
-        //         break;
-        // }
 
         if ((activeSoundClip != SoundClip.NONE) && (activeSoundClip != SoundClip.NUM_OF_CLIPS))
         {
@@ -176,28 +161,18 @@ public class GameController : MonoBehaviour
 
 
 
-
-
-
-
         // creates an empty container (list) of type GameObject
-
         clouds = new List<GameObject>();
 
-
-
         for (int cloudNum = 0; cloudNum < numberOfClouds; cloudNum++)
-
         {
-
             clouds.Add(Instantiate(cloud));
-
         }
-
-
 
         Instantiate(island);
     }
+
+
     // Event Handlers
     public void OnStartButtonClick()
     {

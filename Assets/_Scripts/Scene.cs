@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum Scene
 {
-START,
-MAIN,
-END
+    START,
+    MAIN,
+    END
 }
-

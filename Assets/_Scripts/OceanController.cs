@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OceanController : MonoBehaviour
 {
-    public float verticalSpeed = 0.1f;
+    public float verticalSpeed = 0.1f;  
     public float resetPosition = 4.8f;
     public float resetPoint = -4.8f;
 

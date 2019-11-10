@@ -268,6 +268,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1494848349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1999537804, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 6485742443663585369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1508529425
 GameObject:
   m_ObjectHideFlags: 0
@@ -334,6 +340,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1603435177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007635035, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 6485742443663585369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1647725885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6485742444163612004, guid: 63211e44b836615489776d2977dd9452,
@@ -346,6 +358,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1697218547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1508726596, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 6485742443663585369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1787542063 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 314038372, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 6485742443663585369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2019295050 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
@@ -537,22 +561,22 @@ PrefabInstance:
         type: 3}
       propertyPath: startLabel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1603435177}
     - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: startButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1494848349}
     - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: endLabel
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1697218547}
     - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: restartButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1787542063}
     - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: highScoreLabel
@@ -563,6 +587,12 @@ PrefabInstance:
       propertyPath: highScoreSO
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: activeSceneSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: ddafeda8d3b6f254db01a41680296b03,
+        type: 2}
     - target: {fileID: 6258031004218500823, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: m_LocalPosition.x

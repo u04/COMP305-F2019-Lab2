@@ -215,6 +215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &769360980 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1508726596, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 8537358246247549069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1384263817 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1384263817, guid: 63211e44b836615489776d2977dd9452,
@@ -293,6 +299,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1567266133 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2007635035, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 8537358246247549069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1647725885 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6485742444163612004, guid: 63211e44b836615489776d2977dd9452,
@@ -305,6 +317,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1715037641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1999537804, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 8537358246247549069}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1938197482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 314038372, guid: 63211e44b836615489776d2977dd9452,
+    type: 3}
+  m_PrefabInstance: {fileID: 8537358246247549069}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2019295050 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
@@ -512,6 +536,26 @@ PrefabInstance:
       propertyPath: highScoreLabel
       value: 
       objectReference: {fileID: 1384263817}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: startLabel
+      value: 
+      objectReference: {fileID: 1567266133}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: startButton
+      value: 
+      objectReference: {fileID: 1715037641}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: endLabel
+      value: 
+      objectReference: {fileID: 769360980}
+    - target: {fileID: 6258031004218500820, guid: 0cd6714592b08874d95701663d2115fa,
+        type: 3}
+      propertyPath: restartButton
+      value: 
+      objectReference: {fileID: 1938197482}
     - target: {fileID: 6258031004218500823, guid: 0cd6714592b08874d95701663d2115fa,
         type: 3}
       propertyPath: m_LocalPosition.x
